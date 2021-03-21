@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storage</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // Adding a new item to the list
+        function addItem() {
+            var newItem = document.createElement('div');
+            newItem.innerHTML = document.getElementById('box').value;
+            newItem.onclick = removeItem; // Removew the item when a user clicks on it
+            document.getElementById("list").appendChild(newItem);
+            saveList(); // Save list function call
+        }
+        // Remove an item from the list
+        function removeItem() {
+            document.getElementById("list").removeChild(this);
+            saveList(); // Save list function call
+        }
+        // Save the list
+        function saveList() {
+            localStorage.storedList = document.getElementById("list").innerHTML;
+        }
+        // Load the saved list
+        function loadList() {
+            document.getElementById("list").innerHTML = localStorage.storedList;
+            for (var i = 0; i < list.children.length; i++) {
+                list.children[i].onclick = removeItem;
+            }
+        }
+    </script>
+    
+</head>
+<body>
+    <p>To Do List</p>
+    <input type="text" id="box" placeholder="Add your task"><br>
+    <input type="button" value="Add Item" onclick="addItem();"><br>
+    <div id="list"></div>
+    <script>
+        if (localStorage.storedList) {
+            loadList(); // Load list function call
+        }
+    </script>
+</body>
+</html>
